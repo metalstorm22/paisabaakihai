@@ -9,12 +9,7 @@
 <body>
   <main class="shell">
     <header class="hero">
-      <p class="eyebrow">Friendly-but-pointed reminder</p>
       <h1>Paisa Baaki Hai</h1>
-      <p class="lede">
-        Punch in your phone number to see which subscriptions I cover for you,
-        how far behind you are, and how to pay me back before I send another nudge.
-      </p>
 
       <form id="lookup-form" class="card">
         <label class="label" for="phone-input">Phone number</label>
@@ -38,6 +33,9 @@
           <p class="muted">Total owed</p>
           <p id="total-owed" class="amount">Rs 0</p>
         </div>
+      </div>
+      <div class="results-actions">
+        <button id="change-number" class="text-button hidden" type="button">Check another number</button>
       </div>
 
       <div id="subs-list" class="subs-list"></div>
