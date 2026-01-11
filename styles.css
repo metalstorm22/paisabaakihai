@@ -3,7 +3,7 @@
 :root {
   --bg: #f7f7f7;
   --panel: #ffffff;
-  --muted: #5c6470;
+  --muted: #6b7280;
   --text: #0f172a;
   --accent: #f97316;
   --card: #ffffff;
@@ -35,13 +35,13 @@ body {
 
 h1 {
   margin: 0 0 10px;
-  font-size: clamp(32px, 4vw, 44px);
+  font-size: clamp(30px, 4vw, 38px);
   letter-spacing: -0.04em;
 }
 
 h2 {
   margin: 0;
-  font-size: 28px;
+  font-size: 24px;
   letter-spacing: -0.02em;
 }
 
@@ -58,8 +58,8 @@ h3 {
 
 .eyebrow {
   text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 0.16em;
+  font-size: 11px;
+  letter-spacing: 0.18em;
   color: var(--muted);
   margin: 0 0 8px;
 }
@@ -72,6 +72,8 @@ h3 {
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
+  font-size: 13px;
+  color: var(--muted);
 }
 
 .card {
@@ -126,6 +128,7 @@ input[type="tel"]:focus {
   margin: 10px 0 0;
   color: var(--muted);
   min-height: 20px;
+  font-size: 13px;
 }
 
 .hidden {
@@ -140,19 +143,20 @@ input[type="tel"]:focus {
   margin-bottom: 14px;
 }
 
-.results-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 6px;
-}
-
 .total {
   text-align: right;
 }
 
+.total .muted {
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin: 0;
+}
+
 .amount {
-  margin: 4px 0 0;
-  font-size: 26px;
+  margin: 6px 0 0;
+  font-size: 32px;
   font-weight: 700;
   color: var(--accent);
 }
@@ -176,7 +180,8 @@ input[type="tel"]:focus {
 
 .sub h4 {
   margin: 0;
-  font-size: 17px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .tag {
@@ -188,6 +193,10 @@ input[type="tel"]:focus {
   background: #fff7ed;
   color: var(--accent);
   font-weight: 600;
+  font-size: 13px;
+}
+
+.sub .muted {
   font-size: 13px;
 }
 
@@ -229,21 +238,6 @@ input[type="tel"]:focus {
 
 .pay-fab:active {
   transform: translateX(-50%) translateY(0);
-}
-
-.text-button {
-  border: none;
-  background: none;
-  color: var(--text);
-  font-weight: 600;
-  cursor: pointer;
-  padding: 6px 10px;
-  border-radius: 10px;
-  transition: background-color 120ms ease;
-}
-
-.text-button:hover {
-  background: #f3f4f6;
 }
 
 @media (max-width: 640px) {

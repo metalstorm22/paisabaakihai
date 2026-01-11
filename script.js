@@ -6,7 +6,6 @@ const subsList = document.getElementById('subs-list');
 const personNameEl = document.getElementById('person-name');
 const totalOwedEl = document.getElementById('total-owed');
 const payFab = document.getElementById('pay-floating');
-const changeNumberBtn = document.getElementById('change-number');
 
 const PAYEE_HANDLE = 'your-handle@upi';
 const PAYEE_NAME = 'Your Name';
@@ -16,7 +15,6 @@ let subscriptions = [];
 document.addEventListener('DOMContentLoaded', () => {
   loadCsv();
   form.addEventListener('submit', handleSubmit);
-  changeNumberBtn.addEventListener('click', resetLookup);
 });
 
 async function loadCsv() {
@@ -85,8 +83,6 @@ function renderResults(list) {
   const total = list.reduce((sum, item) => sum + item.owed, 0);
   totalOwedEl.textContent = formatAmount(total);
   updatePayFab(total);
-  changeNumberBtn.classList.remove('hidden');
-  form.classList.add('hidden');
 
   subsList.innerHTML = list
     .map(
@@ -114,7 +110,6 @@ function hideResults() {
   personNameEl.textContent = 'No record yet';
   totalOwedEl.textContent = 'Rs 0';
   payFab.classList.add('hidden');
-  changeNumberBtn.classList.add('hidden');
   form.classList.remove('hidden');
 }
 
@@ -195,12 +190,6 @@ function buildUpiLink(amount) {
     cu: 'INR',
   });
   return `upi://pay?${params.toString()}`;
-}
-
-function resetLookup() {
-  hideResults();
-  phoneInput.focus();
-  setStatus('Ready. Enter your phone number and hit Show dues.');
 }
 
 function formatDate(dateStr) {
