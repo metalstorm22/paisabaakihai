@@ -6,6 +6,8 @@ const subsList = document.getElementById('subs-list');
 const personNameEl = document.getElementById('person-name');
 const totalOwedEl = document.getElementById('total-owed');
 const payFab = document.getElementById('pay-floating');
+const payMenu = document.getElementById('pay-menu');
+const payMenuClose = document.getElementById('pay-menu-close');
 const payButtons = [
   document.getElementById('pay-gpay'),
   document.getElementById('pay-paytm'),
@@ -22,7 +24,10 @@ let subscriptions = [];
 document.addEventListener('DOMContentLoaded', () => {
   loadCsv();
   form.addEventListener('submit', handleSubmit);
+  payFab.addEventListener('click', togglePayMenu);
+  payMenuClose.addEventListener('click', hidePayMenu);
   copyBtn?.addEventListener('click', handleCopyUpi);
+  document.addEventListener('click', handleOutsideClick);
 });
 
 async function loadCsv() {
@@ -42,6 +47,8 @@ async function loadCsv() {
 function handleSubmit(event) {
   event.preventDefault();
   const phone = normalizePhone(phoneInput.value);
+
+  hidePayMenu();
 
   if (!phone) {
     setStatus('Add a phone number first.');
@@ -187,7 +194,6 @@ function updatePayFab(total) {
   const label = amount ? `Pay Rs ${amount}` : 'Pay now';
   const link = buildUpiLink(amount);
   payFab.textContent = label;
-  payFab.href = '#pay-box';
   payFab.classList.remove('hidden');
   setPayLinks(link);
 }
@@ -246,5 +252,28 @@ async function handleCopyUpi() {
     }, 2000);
   } catch (e) {
     copyStatus.textContent = 'Copy failed. Long-press to copy.';
+  }
+}
+
+function togglePayMenu() {
+  if (payMenu.classList.contains('hidden')) {
+    payMenu.classList.remove('hidden');
+  } else {
+    hidePayMenu();
+  }
+}
+
+function hidePayMenu() {
+  payMenu.classList.add('hidden');
+}
+
+function handleOutsideClick(event) {
+  if (payMenu.classList.contains('hidden')) return;
+  if (
+    !payMenu.contains(event.target) &&
+    event.target !== payFab &&
+    !payFab.contains(event.target)
+  ) {
+    hidePayMenu();
   }
 }

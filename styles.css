@@ -215,11 +215,57 @@ input[type="tel"]:focus {
   margin-top: 8px;
 }
 
+.pay-fab {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  padding: 14px 20px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #0f172a;
+  font-weight: 700;
+  border: 1px solid #0f172a;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.pay-fab:hover {
+  transform: translateX(-50%) translateY(-1px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+.pay-fab:active {
+  transform: translateX(-50%) translateY(0);
+}
+
+.pay-menu {
+  position: fixed;
+  left: 50%;
+  bottom: 80px;
+  transform: translateX(-50%);
+  width: min(520px, 92vw);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.16);
+  padding: 14px;
+  z-index: 20;
+}
+
+.pay-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
 .pay-buttons {
   display: grid;
   gap: 8px;
   grid-template-columns: 1fr;
-  margin-top: 12px;
 }
 
 .pay-btn {
@@ -248,31 +294,6 @@ input[type="tel"]:focus {
   color: var(--text);
 }
 
-.pay-fab {
-  position: fixed;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  padding: 14px 20px;
-  border-radius: 999px;
-  background: var(--accent);
-  color: #0f172a;
-  font-weight: 700;
-  border: 1px solid #0f172a;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
-  text-decoration: none;
-  transition: transform 120ms ease, box-shadow 120ms ease;
-}
-
-.pay-fab:hover {
-  transform: translateX(-50%) translateY(-1px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
-}
-
-.pay-fab:active {
-  transform: translateX(-50%) translateY(0);
-}
-
 @media (max-width: 640px) {
   .input-row {
     grid-template-columns: 1fr;
@@ -290,5 +311,11 @@ input[type="tel"]:focus {
 
   .total {
     text-align: left;
+  }
+
+  .pay-menu {
+    bottom: 86px;
+    width: min(480px, 94vw);
+    padding: 12px;
   }
 }

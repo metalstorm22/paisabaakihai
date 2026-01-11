@@ -42,18 +42,25 @@
         <p>UPI: <span class="mono">your-handle@upi</span></p>
         <p>Bank: <span class="mono">0000 0000 0000</span> (add your real details)</p>
         <p class="small muted">Send a screenshot after paying so I can stop reminding you.</p>
-        <div class="pay-buttons">
-          <a id="pay-gpay" class="pay-btn" href="#" role="button">Google Pay</a>
-          <a id="pay-paytm" class="pay-btn" href="#" role="button">Paytm</a>
-          <a id="pay-phonepe" class="pay-btn" href="#" role="button">PhonePe/WhatsApp Pay</a>
-          <button id="copy-upi" class="pay-btn ghost" type="button">Copy UPI link</button>
-        </div>
-        <p id="copy-status" class="small muted"></p>
       </div>
     </section>
   </main>
 
-  <a id="pay-floating" class="pay-fab hidden" href="#pay-box" role="button">Pay now</a>
+  <button id="pay-floating" class="pay-fab hidden" type="button">Pay now</button>
+
+  <div id="pay-menu" class="pay-menu hidden">
+    <div class="pay-menu-head">
+      <p class="muted small">Choose how you want to pay</p>
+      <button id="pay-menu-close" class="icon-button" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="pay-buttons">
+      <a id="pay-gpay" class="pay-btn" href="#" role="button">Google Pay</a>
+      <a id="pay-paytm" class="pay-btn" href="#" role="button">Paytm</a>
+      <a id="pay-phonepe" class="pay-btn" href="#" role="button">PhonePe / WhatsApp Pay</a>
+      <button id="copy-upi" class="pay-btn ghost" type="button">Copy UPI link</button>
+    </div>
+    <p id="copy-status" class="small muted"></p>
+  </div>
 
   <script src="script.js"></script>
 </body>
