@@ -141,16 +141,12 @@ function monthsBehind(dateStr) {
   if (Number.isNaN(paidDate.getTime())) return 0;
 
   const now = new Date();
-  let months =
+  const months =
     now.getFullYear() * 12 +
     now.getMonth() -
     (paidDate.getFullYear() * 12 + paidDate.getMonth());
 
-  // If today is before the day-of-month of the payment, count that month as unpaid.
-  if (now.getDate() < paidDate.getDate()) {
-    months -= 1;
-  }
-
+  // Calendar-month based: if you last paid in October, November is the first month owed.
   return Math.max(0, months);
 }
 
