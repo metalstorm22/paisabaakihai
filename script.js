@@ -5,6 +5,10 @@ const resultsSection = document.getElementById('results');
 const subsList = document.getElementById('subs-list');
 const personNameEl = document.getElementById('person-name');
 const totalOwedEl = document.getElementById('total-owed');
+const payFab = document.getElementById('pay-floating');
+
+const PAYEE_HANDLE = 'your-handle@upi';
+const PAYEE_NAME = 'Your Name';
 
 let subscriptions = [];
 
@@ -80,6 +84,7 @@ function renderResults(list) {
 
   const total = list.reduce((sum, item) => sum + item.owed, 0);
   totalOwedEl.textContent = formatAmount(total);
+  updatePayFab(total);
 
   subsList.innerHTML = list
     .map(
@@ -106,6 +111,7 @@ function hideResults() {
   subsList.innerHTML = '';
   personNameEl.textContent = 'No record yet';
   totalOwedEl.textContent = 'Rs 0';
+  payFab.classList.add('hidden');
 }
 
 function parseCsv(text) {
@@ -156,6 +162,24 @@ function normalizePhone(value) {
 function formatAmount(value) {
   const rounded = Math.round((Number(value) || 0) * 100) / 100;
   return Number.isInteger(rounded) ? `Rs ${rounded}` : `Rs ${rounded.toFixed(2)}`;
+}
+
+function updatePayFab(total) {
+  const amount = Math.max(0, Math.round((Number(total) || 0) * 100) / 100);
+  const label = amount ? `Pay Rs ${amount}` : 'Pay now';
+  payFab.textContent = label;
+  payFab.href = buildUpiLink(amount);
+  payFab.classList.remove('hidden');
+}
+
+function buildUpiLink(amount) {
+  const params = new URLSearchParams({
+    pa: PAYEE_HANDLE,
+    pn: PAYEE_NAME,
+    am: amount || '',
+    cu: 'INR',
+  });
+  return `upi://pay?${params.toString()}`;
 }
 
 function formatDate(dateStr) {
