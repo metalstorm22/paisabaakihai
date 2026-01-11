@@ -6,6 +6,13 @@ const subsList = document.getElementById('subs-list');
 const personNameEl = document.getElementById('person-name');
 const totalOwedEl = document.getElementById('total-owed');
 const payFab = document.getElementById('pay-floating');
+const payButtons = [
+  document.getElementById('pay-gpay'),
+  document.getElementById('pay-paytm'),
+  document.getElementById('pay-phonepe'),
+];
+const copyBtn = document.getElementById('copy-upi');
+const copyStatus = document.getElementById('copy-status');
 
 const PAYEE_HANDLE = 'parthgupta2008@okicici';
 const PAYEE_NAME = 'Parth Gupta';
@@ -15,6 +22,7 @@ let subscriptions = [];
 document.addEventListener('DOMContentLoaded', () => {
   loadCsv();
   form.addEventListener('submit', handleSubmit);
+  copyBtn?.addEventListener('click', handleCopyUpi);
 });
 
 async function loadCsv() {
@@ -177,9 +185,11 @@ function formatAmount(value) {
 function updatePayFab(total) {
   const amount = Math.max(0, Math.round((Number(total) || 0) * 100) / 100);
   const label = amount ? `Pay Rs ${amount}` : 'Pay now';
+  const link = buildUpiLink(amount);
   payFab.textContent = label;
-  payFab.href = buildUpiLink(amount);
+  payFab.href = '#pay-box';
   payFab.classList.remove('hidden');
+  setPayLinks(link);
 }
 
 function buildUpiLink(amount) {
@@ -212,4 +222,29 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+function setPayLinks(link) {
+  payButtons.forEach((btn) => {
+    if (btn) btn.href = link;
+  });
+  if (copyBtn) copyBtn.setAttribute('data-upi', link);
+}
+
+async function handleCopyUpi() {
+  const upiLink = copyBtn?.getAttribute('data-upi') || '';
+  if (!upiLink) {
+    copyStatus.textContent = 'No link to copy yet.';
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(upiLink);
+    copyStatus.textContent = 'UPI link copied.';
+    setTimeout(() => {
+      if (copyStatus) copyStatus.textContent = '';
+    }, 2000);
+  } catch (e) {
+    copyStatus.textContent = 'Copy failed. Long-press to copy.';
+  }
 }
