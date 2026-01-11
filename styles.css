@@ -262,6 +262,21 @@ input[type="tel"]:focus {
   margin-bottom: 8px;
 }
 
+.icon-button {
+  border: none;
+  background: none;
+  color: var(--text);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px 10px;
+  line-height: 1;
+  border-radius: 8px;
+}
+
+.icon-button:hover {
+  background: #f3f4f6;
+}
+
 .pay-buttons {
   display: grid;
   gap: 8px;
