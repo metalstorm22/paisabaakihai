@@ -65,13 +65,16 @@ function enrichRow(row) {
   const monthly = Number(monthlyRaw) || 0;
   const lastPaid = row.last_paid ?? row.last_paid_date ?? row.lastPayment ?? '';
   const monthsDue = monthsBehind(lastPaid);
-  const owed = Math.max(0, Math.round(monthly * monthsDue));
+  const paidRaw = row.paid ?? row.amount_paid ?? row.paid_amount ?? '0';
+  const paid = Number(paidRaw) || 0;
+  const owed = Math.max(0, Math.round(monthly * monthsDue - paid));
 
   return {
     ...row,
     monthly,
     lastPaid,
     monthsDue,
+    paid,
     owed,
   };
 }
@@ -93,6 +96,7 @@ function renderResults(list) {
             <p class="small muted">
               Monthly: ${formatAmount(item.monthly)} • Last paid: ${formatDate(item.lastPaid)}
             </p>
+            ${item.paid > 0 ? `<p class="small muted">Paid so far: ${formatAmount(item.paid)}</p>` : ''}
           </div>
           <div class="tag">Due: ${formatAmount(item.owed)}</div>
           <p class="small muted">Behind: ${item.monthsDue} month(s)</p>

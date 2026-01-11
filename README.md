@@ -12,15 +12,16 @@ Static reminder site that shows someone which shared subscriptions they owe you 
 Keep one row per subscription per person. Dates should be `YYYY-MM-DD`.
 
 ```
-name,phone,subscription,monthly_amount,last_paid
-Rohan,+919876543210,Netflix,249,2023-10-15
-Rohan,+919876543210,Spotify,119,2023-09-02
-Neha,+919876500123,YouTube Premium,139,2023-12-01
+name,phone,subscription,monthly_amount,last_paid,paid
+Rohan,+919876543210,Netflix,249,2023-10-15,200
+Rohan,+919876543210,Spotify,119,2023-09-02,0
+Neha,+919876500123,YouTube Premium,139,2023-12-01,50
 ```
 
 Tips:
 - Use the same phone number format per person; matching is done by digits only (spaces and symbols are ignored).
 - Avoid commas in values to keep the simple CSV parser happy.
+- `paid` is optional; use it for partial payments already made toward the owed amount (it subtracts from the total due). Leave `0` if nothing paid.
 - Update `last_paid` after each payment; the page calculates full months since that date.
 
 ## How it works
