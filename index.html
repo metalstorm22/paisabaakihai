@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paisa Baaki Hai</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <p class="eyebrow">Friendly-but-pointed reminder</p>
+      <h1>Paisa Baaki Hai</h1>
+      <p class="lede">
+        Punch in your phone number to see which subscriptions I cover for you,
+        how far behind you are, and how to pay me back before I send another nudge.
+      </p>
+
+      <form id="lookup-form" class="card">
+        <label class="label" for="phone-input">Phone number</label>
+        <div class="input-row">
+          <input id="phone-input" type="tel" name="phone" inputmode="numeric" autocomplete="tel"
+            placeholder="Enter your phone number" required>
+          <button type="submit" class="pill">Show dues</button>
+        </div>
+        <p id="status" class="status"></p>
+      </form>
+    </header>
+
+    <section id="results" class="card hidden">
+      <div class="results-head">
+        <div>
+          <p class="eyebrow">Your tab</p>
+          <h2 id="person-name">No record yet</h2>
+          <p class="muted">Last updated today</p>
+        </div>
+        <div class="total">
+          <p class="muted">Total owed</p>
+          <p id="total-owed" class="amount">Rs 0</p>
+        </div>
+      </div>
+
+      <div id="subs-list" class="subs-list"></div>
+
+      <div class="pay-box">
+        <h3>How to pay</h3>
+        <p>UPI: <span class="mono">your-handle@upi</span></p>
+        <p>Bank: <span class="mono">0000 0000 0000</span> (add your real details)</p>
+        <p class="small muted">Send a screenshot after paying so I can stop reminding you.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
