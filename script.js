@@ -7,8 +7,8 @@ const personNameEl = document.getElementById('person-name');
 const totalOwedEl = document.getElementById('total-owed');
 const payFab = document.getElementById('pay-floating');
 
-const PAYEE_HANDLE = 'your-handle@upi';
-const PAYEE_NAME = 'Your Name';
+const PAYEE_HANDLE = 'parthgupta2008@okicici';
+const PAYEE_NAME = 'Parth Gupta';
 
 let subscriptions = [];
 

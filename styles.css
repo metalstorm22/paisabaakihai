@@ -26,15 +26,15 @@ body {
 .shell {
   max-width: 900px;
   margin: 0 auto;
-  padding: 48px 20px 120px;
+  padding: 36px 16px 100px;
 }
 
 .hero {
-  padding: 12px 0 28px;
+  padding: 6px 0 18px;
 }
 
 h1 {
-  margin: 0 0 10px;
+  margin: 0 0 6px;
   font-size: clamp(30px, 4vw, 38px);
   letter-spacing: -0.04em;
 }
@@ -80,7 +80,7 @@ h3 {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 18px;
+  padding: 16px;
   box-shadow: var(--shadow);
 }
 
@@ -125,7 +125,7 @@ input[type="tel"]:focus {
 }
 
 .status {
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   color: var(--muted);
   min-height: 20px;
   font-size: 13px;
@@ -140,7 +140,7 @@ input[type="tel"]:focus {
   justify-content: space-between;
   gap: 12px;
   align-items: flex-start;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
 }
 
 .total {
@@ -163,14 +163,14 @@ input[type="tel"]:focus {
 
 .subs-list {
   display: grid;
-  gap: 12px;
-  margin: 16px 0 18px;
+  gap: 10px;
+  margin: 10px 0 12px;
 }
 
 .sub {
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 12px 14px;
+  padding: 10px 12px;
   background: #fff;
   display: grid;
   grid-template-columns: 1fr auto;
