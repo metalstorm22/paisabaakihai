@@ -192,10 +192,9 @@ function formatAmount(value) {
 function updatePayFab(total) {
   const amount = Math.max(0, Math.round((Number(total) || 0) * 100) / 100);
   const label = amount ? `Pay Rs ${amount}` : 'Pay now';
-  const link = buildUpiLink(amount);
   payFab.textContent = label;
   payFab.classList.remove('hidden');
-  setPayLinks(link);
+  setPayLinks(amount);
 }
 
 function buildUpiLink(amount) {
@@ -230,11 +229,17 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
-function setPayLinks(link) {
-  payButtons.forEach((btn) => {
-    if (btn) btn.href = link;
-  });
-  if (copyBtn) copyBtn.setAttribute('data-upi', link);
+function setPayLinks(amount) {
+  const generic = buildUpiLink(amount);
+  const gpayLink = buildPayLink('gpay', amount);
+  const paytmLink = buildPayLink('paytm', amount);
+  const phonepeLink = buildPayLink('phonepe', amount);
+
+  if (payButtons[0]) payButtons[0].href = gpayLink;
+  if (payButtons[1]) payButtons[1].href = paytmLink;
+  if (payButtons[2]) payButtons[2].href = phonepeLink;
+
+  if (copyBtn) copyBtn.setAttribute('data-upi', generic);
 }
 
 async function handleCopyUpi() {
@@ -268,12 +273,33 @@ function hidePayMenu() {
 }
 
 function handleOutsideClick(event) {
+  if (!payMenu) return;
   if (payMenu.classList.contains('hidden')) return;
   if (
     !payMenu.contains(event.target) &&
     event.target !== payFab &&
-    !payFab.contains(event.target)
+    !payFab?.contains(event.target)
   ) {
     hidePayMenu();
+  }
+}
+
+function buildPayLink(app, amount) {
+  const params = new URLSearchParams({
+    pa: PAYEE_HANDLE,
+    pn: PAYEE_NAME,
+    am: amount || '',
+    cu: 'INR',
+  });
+
+  switch (app) {
+    case 'gpay':
+      return `gpay://upi/pay?${params.toString()}`;
+    case 'paytm':
+      return `paytmmp://pay?${params.toString()}`;
+    case 'phonepe':
+      return `phonepe://upi/pay?${params.toString()}`;
+    default:
+      return buildUpiLink(amount);
   }
 }
