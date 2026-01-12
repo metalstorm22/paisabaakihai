@@ -291,15 +291,38 @@ function buildPayLink(app, amount) {
     am: amount || '',
     cu: 'INR',
   });
+  const query = params.toString();
+  const platform = getPlatform();
 
+  if (platform === 'android') {
+    switch (app) {
+      case 'gpay':
+        return `intent://upi/pay?${query}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
+      case 'paytm':
+        return `intent://upi/pay?${query}#Intent;scheme=upi;package=net.one97.paytm;end`;
+      case 'phonepe':
+        return `intent://upi/pay?${query}#Intent;scheme=upi;package=com.phonepe.app;end`;
+      default:
+        return buildUpiLink(amount);
+    }
+  }
+
+  // iOS and desktop: fall back to the app scheme first, then generic UPI.
   switch (app) {
     case 'gpay':
-      return `gpay://upi/pay?${params.toString()}`;
+      return `gpay://upi/pay?${query}`;
     case 'paytm':
-      return `paytmmp://pay?${params.toString()}`;
+      return `paytmmp://pay?${query}`;
     case 'phonepe':
-      return `phonepe://upi/pay?${params.toString()}`;
+      return `phonepe://upi/pay?${query}`;
     default:
       return buildUpiLink(amount);
   }
+}
+
+function getPlatform() {
+  const ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) return 'android';
+  if (/iPhone|iPad|iPod/i.test(ua)) return 'ios';
+  return 'other';
 }
